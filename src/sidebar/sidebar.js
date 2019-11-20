@@ -4,14 +4,15 @@ import styles from './style';
 import List from '@material-ui/core/List';
 import { Divider, Button } from '@material-ui/core';
 import SidebarItemComponent from '../sidebaritem/sidebaritem';
-import { classExpression } from '@babel/types';
-
+const firebase = require('firebase')
 class SidebarComponent extends React.Component {
   constructor() {
     super();
     this.state = {
+      email: null,
       addingNote: false,
-      title: null
+      title: null,
+      notes: null
     };
   }
 
@@ -51,6 +52,7 @@ class SidebarComponent extends React.Component {
                 })
               }
             </List>
+            <Button onClick={this.signOut} className={classes.signOutBtn}>Sign Out</Button>
         </div>
     )
     } else {
@@ -76,7 +78,28 @@ class SidebarComponent extends React.Component {
 
   deleteNote = (note) => this.props.deleteNote(note);
 
-  
+  signOut = () => firebase.auth().signOut();
+
+  componentWillMount = () => {
+    firebase.auth().onAuthStateChanged(async _usr => {
+      if(!_usr)
+        this.props.history.push('/login');
+      else {
+        firebase
+          .firestore()
+          .collection('notes')
+          .where('users', 'array-contains', _usr.email)
+          .onSnapshot(async res => {
+            const notes = res.docs.map(_doc => _doc.data());
+            this.setState({
+              email: _usr.email,
+              notes: notes
+            });
+          })
+      }
+  });
+}
+
 }
 
 export default withStyles(styles)(SidebarComponent);

@@ -11,7 +11,7 @@ class SidebarItemComponent extends React.Component {
   render() {
 
     const { _index, _note, classes, selectedNoteIndex } = this.props;
-
+    
     return (
         <div key={_index}>
             <ListItem className={classes.listItem}
@@ -27,6 +27,7 @@ class SidebarItemComponent extends React.Component {
                 <DeleteIcon onClick={() => this.deleteNote(_note)} className={classes.deleteIcon}>
                 </DeleteIcon>
             </ListItem>
+            
         </div>
         
     )

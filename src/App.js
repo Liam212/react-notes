@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import './App.css';
+import { Route, BrowserRouter as Router } from 'react-router-dom';
 import SidebarComponent from './sidebar/sidebar';
 import EditorComponent from './editor/editor';
+import SignUp from './signup/signup';
+import LogIn from './login/login';
+import { Divider } from '@material-ui/core';
 
 const firebase = require('firebase')
 
@@ -17,23 +21,32 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="app-container">
-        <SidebarComponent selectedNoteIndex={this.state.selectedNoteIndex} 
-        notes={this.state.notes}
-        deleteNote={this.deleteNote}
-        selectNote={this.selectNote}
-        newNote={this.newNote}>
-        </SidebarComponent>
-        {
-          this.state.selectedNote ? 
-          <EditorComponent
-          selectedNote={this.state.selectedNote}
-          selectedNoteIndex={this.state.selectedNoteIndex}
-          notes={this.state.notes}
-          noteUpdate={this.noteUpdate}>
-          </EditorComponent> : null
-        }
-      </div>
+      <Router>
+        <div>
+          <Route exact path="/notes" render={props => 
+            <Fragment>
+              <SidebarComponent {...props} selectedNoteIndex={this.state.selectedNoteIndex} 
+              notes={this.state.notes}
+              deleteNote={this.deleteNote}
+              selectNote={this.selectNote}
+              newNote={this.newNote}>
+              </SidebarComponent>
+              {
+              this.state.selectedNote ?  
+              <EditorComponent {...props}
+              selectedNote={this.state.selectedNote}
+              selectedNoteIndex={this.state.selectedNoteIndex}
+              notes={this.state.notes}
+              noteUpdate={this.noteUpdate}>
+              </EditorComponent> : null
+              }
+            </Fragment>
+          } />
+
+          <Route exact path="/" component={(props) => <SignUp {...props}/>} />
+          <Route exact path="/login" component={(props) => <LogIn {...props}/>} />
+        </div>
+      </Router>
     )
   }
   
@@ -60,7 +73,7 @@ class App extends React.Component {
   newNote = async (title) => {
     const note = {
       title: title,
-      body: ''
+      body: '',
     }
     const newFromDB = await firebase.firestore().collection('notes')
     .add({
