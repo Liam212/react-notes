@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import React from 'react';
 import styles from './style';
 import './googleButton.css'
@@ -103,7 +103,9 @@ class SignupComponent extends React.Component {
             .doc(this.state.email)
             .set(userObj)
             .then(() => {
-              this.props.history.push('/notes');
+                return (
+                    <Redirect to={{ pathname: '/notes'}} />
+                  )
           }, dbErr => {
             console.log('Failed to add user to the database: ', dbErr);
             this.setState({ signupError: 'Failed to add user' });
@@ -119,7 +121,9 @@ class SignupComponent extends React.Component {
         var provider = new firebase.auth.GoogleAuthProvider();
         provider.addScope('https://www.googleapis.com/auth/userinfo.email');
         firebase.auth().signInWithPopup(provider).then(result => {
-            this.props.history.push('/notes');
+            return (
+                <Redirect to={{ pathname: '/notes'}} />
+              )
         }, error => {
             this.setState({ signupError: error });
         });

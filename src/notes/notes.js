@@ -3,11 +3,10 @@ import './App.css';
 import SidebarComponent from './../sidebar/sidebar';
 import EditorComponent from './../editor/editor';
 import { Redirect } from 'react-router-dom';
-
 const firebase = require('firebase')
 
 class Notes extends React.Component {
-
+    
     constructor() {
         super()
         this.state = {
@@ -17,9 +16,11 @@ class Notes extends React.Component {
           isLoggedIn: true,
           useruid: null
         }
+        
       }
-
+    
     render() {
+
         return (
         <div className="app-container">
           {
@@ -33,7 +34,7 @@ class Notes extends React.Component {
             ) : (
             <Redirect to={{ pathname: '/login'}} />
             )}
-          {
+          { 
             this.state.selectedNote ?
             <EditorComponent selectedNote={this.state.selectedNote}
             selectedNoteIndex={this.state.selectedNoteIndex}
@@ -41,12 +42,11 @@ class Notes extends React.Component {
             noteUpdate={this.noteUpdate}></EditorComponent> :
             null
           }
-
-          
         </div>
         )
     }
     componentWillMount = () => {
+      
       firebase.auth().onAuthStateChanged(async _usr => {
         if(!_usr)
           this.props.history.push('/login');
@@ -60,7 +60,6 @@ class Notes extends React.Component {
                 const notes = serverUpdate.docs.map(_doc => {
                     const data = _doc.data();
                     data['id'] = _doc.id;
-
                     return data;
                 });
                 this.setState({ notes: notes, useruid: _usr.uid });
@@ -68,6 +67,7 @@ class Notes extends React.Component {
           }
       });
     }
+    
 
   selectNote = (note, index) => this.setState({ selectedNoteIndex: index, selectedNote: note })
   noteUpdate = (id, noteObj) => {

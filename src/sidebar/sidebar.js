@@ -4,7 +4,6 @@ import styles from './style';
 import List from '@material-ui/core/List';
 import { Divider, Button } from '@material-ui/core';
 import SidebarItemComponent from '../sidebaritem/sidebaritem';
-import { Link } from 'react-router-dom';
 
 const firebase = require('firebase')
 class SidebarComponent extends React.Component {

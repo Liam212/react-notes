@@ -12,6 +12,7 @@ class App extends React.Component {
     return (
       <Router>
         <div>
+          <Navbar/>
           <Route exact path="/notes" component={(props) => <Notes {...props}/>} />
           <Route exact path="/" component={(props) => <SignUp {...props}/>} />
           <Route exact path="/login" component={(props) => <LogIn {...props}/>} />
