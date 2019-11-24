@@ -4,15 +4,15 @@ import styles from './style';
 import List from '@material-ui/core/List';
 import { Divider, Button } from '@material-ui/core';
 import SidebarItemComponent from '../sidebaritem/sidebaritem';
+import { Link } from 'react-router-dom';
+
 const firebase = require('firebase')
 class SidebarComponent extends React.Component {
   constructor() {
     super();
     this.state = {
-      email: null,
       addingNote: false,
-      title: null,
-      notes: null
+      title: null
     };
   }
 
@@ -20,7 +20,7 @@ class SidebarComponent extends React.Component {
 
     const { notes, classes, selectedNoteIndex } = this.props;
 
-    if(notes) {
+    if (notes) {
       return (
         <div className={classes.sidebarContainer}>
             <Button onClick={this.newNoteBtnClick} className={classes.newNoteBtn}>{ this.state.addingNote ? 'Cancel' : 'New Note' }</Button>
@@ -56,10 +56,9 @@ class SidebarComponent extends React.Component {
         </div>
     )
     } else {
-      return(<div></div>)
+      return <div>loading...</div>;
     }
   }
-
 
   newNoteBtnClick = () => {
     this.setState({ title: null, addingNote: !this.state.addingNote });
@@ -79,26 +78,6 @@ class SidebarComponent extends React.Component {
   deleteNote = (note) => this.props.deleteNote(note);
 
   signOut = () => firebase.auth().signOut();
-
-  componentWillMount = () => {
-    firebase.auth().onAuthStateChanged(async _usr => {
-      if(!_usr)
-        this.props.history.push('/login');
-      else {
-        firebase
-          .firestore()
-          .collection('notes')
-          .where('users', 'array-contains', _usr.email)
-          .onSnapshot(async res => {
-            const notes = res.docs.map(_doc => _doc.data());
-            this.setState({
-              email: _usr.email,
-              notes: notes
-            });
-          })
-      }
-  });
-}
 
 }
 

@@ -4,7 +4,6 @@ import debounce from '../helper';
 import BorderColorIcon from '@material-ui/icons/BorderColor';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './style';
-import { thisExpression } from '@babel/types';
 
 class EditorComponent extends React.Component {
   constructor() {

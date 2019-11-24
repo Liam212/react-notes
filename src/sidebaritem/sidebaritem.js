@@ -27,7 +27,7 @@ class SidebarItemComponent extends React.Component {
                 <DeleteIcon onClick={() => this.deleteNote(_note)} className={classes.deleteIcon}>
                 </DeleteIcon>
             </ListItem>
-            
+
         </div>
         
     )

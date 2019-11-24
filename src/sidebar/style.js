@@ -7,18 +7,9 @@ const styles = theme => ({
       width: '300px',
       boxShadow: '0px 0px 2px black'
     },
-    newChatBtn: {
-      borderRadius: '0px'
-    },
-    unreadMessage: {
-      color: 'red',
-      position: 'absolute',
-      top: '0',
-      right: '5px'
-    },
     newNoteBtn: {
       width: '100%',
-      height: '35px',
+      height: '50px',
       borderBottom: '1px solid black',
       borderRadius: '0px',
       backgroundColor: '#29487d',
@@ -60,7 +51,7 @@ const styles = theme => ({
       width: '300px',
       borderRadius: '0px',
       backgroundColor: '#227092',
-      height: '35px',
+      height: '50x',
       boxShadow: '0px 0px 2px black',
       color: 'white'
     }  
