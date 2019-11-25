@@ -3,6 +3,7 @@ import './App.css';
 import SidebarComponent from './../sidebar/sidebar';
 import EditorComponent from './../editor/editor';
 import { Redirect } from 'react-router-dom';
+
 const firebase = require('firebase')
 
 class Notes extends React.Component {
