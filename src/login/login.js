@@ -89,9 +89,7 @@ class LoginComponent extends React.Component {
         .auth()
         .signInWithEmailAndPassword(this.state.email, this.state.password)
         .then(() => {
-          return (
-            <Redirect to={{ pathname: '/notes'}} />
-          )
+          this.props.history.push('/notes')
         }, err => {
           this.setState({ serverError: true });
           console.log('Error logging in: ', err);
@@ -104,9 +102,7 @@ class LoginComponent extends React.Component {
       var provider = new firebase.auth.GoogleAuthProvider();
       provider.addScope('https://www.googleapis.com/auth/userinfo.email');
       firebase.auth().signInWithPopup(provider).then(result => {
-        return (
-          <Redirect to={{ pathname: '/notes'}} />
-        )
+        this.props.history.push('/notes')
       }, error => {
           this.setState({ signupError: error });
       });
