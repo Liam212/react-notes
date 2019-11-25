@@ -1,4 +1,4 @@
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import React from 'react';
 import styles from './style';
 import './googleButton.css'
@@ -83,7 +83,7 @@ class SignupComponent extends React.Component {
                     <h5 component='h5' variant='h6' className={classes.hasAccountHeader}>Already have an account?</h5>
                     <Link className={classes.logInLink} to='/login'>Log In!</Link>
                 </Paper>
-                <h6 style={{textAlign: 'center', fontWeight: 400, marginTop: 8 + 'px'}}><img src={github} height="20" width="20" style={{marginTop: 1 + 'px'}}/>This is an open source project.<a href="https://www.github.com/liam212/react-notes"> Check it out!</a></h6>
+                <h6 style={{textAlign: 'center', fontWeight: 400, marginTop: 8 + 'px'}}><img src={github} height="20" width="20" style={{marginTop: 1 + 'px'}} alt='github'/>This is an open source project.<a href="https://www.github.com/liam212/react-notes"> Check it out!</a></h6>
               <h6 style={{textAlign: 'center', fontWeight: 200, marginTop: 4 + 'px'}}>Designed and built by Liam Stout ©2019</h6>
             </main>
         )
