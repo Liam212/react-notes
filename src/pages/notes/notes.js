@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import SidebarComponent from './../sidebar/sidebar';
-import EditorComponent from './../editor/editor';
+import SidebarComponent from './../../components/sidebar/sidebar';
+import EditorComponent from './../../components/editor/editor';
 import { Redirect } from 'react-router-dom';
 
 const firebase = require('firebase')
@@ -13,7 +13,7 @@ class Notes extends React.Component {
         this.state = {
           selectedNoteIndex: null,
           selectedNote: null,
-          notes: null,
+          notes: null,1
           isLoggedIn: true,
           useruid: null
         }
@@ -35,7 +35,7 @@ class Notes extends React.Component {
             ) : (
             <Redirect to={{ pathname: '/login'}} />
             )}
-          { 
+            { 
             this.state.selectedNote ?
             <EditorComponent selectedNote={this.state.selectedNote}
             selectedNoteIndex={this.state.selectedNoteIndex}
@@ -94,6 +94,7 @@ class Notes extends React.Component {
           body: note.body,
           timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
+
       const newID = newFromDB.id;
       await this.setState({ notes: [...this.state.notes, note] });
       const newNoteIndex = this.state.notes.indexOf(this.state.notes.filter(_note => _note.id === newID)[0]);

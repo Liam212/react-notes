@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 import styles from './style';
-import './googleButton.css'
+import './../googleButton.css'
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
@@ -10,16 +10,14 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import github from './github.png'
 const firebase = require("firebase");
 
-class SignupComponent extends React.Component {
-
-
+class SignUp extends React.Component {
 
     constructor() {
         super();
         this.state = {
+        name: null,
         email: null,
         password: null,
         confirmation: null,
@@ -27,11 +25,7 @@ class SignupComponent extends React.Component {
         };
     }
 
-
-
     render() {
-
-
 
         const { classes } = this.props;
 
@@ -43,6 +37,10 @@ class SignupComponent extends React.Component {
                         Sign Up!
                     </Typography>
                     <form onSubmit={(e) => this.submitSignup(e)} className={classes.form}>
+                        <FormControl required fullWidth margin='normal'>
+                            <InputLabel htmlFor='signup-name-input'>Enter Your Name</InputLabel>
+                            <Input autoComplete='name' autoFocus id='signup-name-input' onChange={(e) => this.userTyping('name', e)}></Input>
+                        </FormControl>
                         <FormControl required fullWidth margin='normal'>
                             <InputLabel htmlFor='signup-email-input'>Enter Your Email</InputLabel>
                             <Input autoComplete='email' autoFocus id='signup-email-input' onChange={(e) => this.userTyping('email', e)}></Input>
@@ -57,7 +55,7 @@ class SignupComponent extends React.Component {
                         </FormControl>
                         <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>Submit</Button>
                     </form>
-                    <h6 className="alternative-signup">or sign up with</h6>
+                    <h4 className="alternative-signup">or sign up with</h4>
                     <hr/>
                     <form onSubmit={(e) => this.googleSignin(e)}>
                     <div className="google-div">
@@ -69,12 +67,6 @@ class SignupComponent extends React.Component {
                         </button>
                     </div>
                     </form>
-                    <p>or</p>
-                    <form onSubmit={(e) => this.anonSignin(e)}>
-                        <Button variant='contained' color='grey' type="submit" style={{marginBottom: 10 + 'px'}}>Sign in anonymously</Button>
-                    </form>
-                    <p style={{textAlign: 'center', fontSize: 10 + 'px', color: 'red'}}><i>Signing in anonymously is simply to test the service and will not save your data!</i></p>
-                    
                     {
                         this.state.signupError ?
                         <Typography className={classes.signupError} component='h5' variant='h6'>{this.state.signupError}</Typography> :
@@ -83,8 +75,6 @@ class SignupComponent extends React.Component {
                     <h5 component='h5' variant='h6' className={classes.hasAccountHeader}>Already have an account?</h5>
                     <Link className={classes.logInLink} to='/login'>Log In!</Link>
                 </Paper>
-                <h6 style={{textAlign: 'center', fontWeight: 400, marginTop: 8 + 'px'}}><img src={github} height="20" width="20" style={{marginTop: 1 + 'px'}} alt='github'/>This is an open source project.<a href="https://www.github.com/liam212/react-notes"> Check it out!</a></h6>
-              <h6 style={{textAlign: 'center', fontWeight: 200, marginTop: 4 + 'px'}}>Designed and built by Liam Stout ©2019</h6>
             </main>
         )
     }
@@ -104,6 +94,7 @@ class SignupComponent extends React.Component {
         .createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then(authRes => {
           const userObj = {
+            name: this.state.name,
             email: authRes.user.email
           };
           firebase
@@ -134,23 +125,10 @@ class SignupComponent extends React.Component {
         });
     }
 
-    anonSignin = (e) => {
-        e.preventDefault()
-        firebase.auth().signInAnonymously().then(result => {
-            this.props.history.push('/notes')
-        }, error => {
-            this.setState({ signupError: error });
-        });
-    }
-    
-    
-
-
     userTyping = (type, e) => {
         this.setState({ [type]: e.target.value })
     }
 
-
 }
 
-export default withStyles(styles)(SignupComponent);
+export default withStyles(styles)(SignUp);

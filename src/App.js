@@ -1,10 +1,8 @@
 import React from 'react';
-import './App.css';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
-import Notes from './notes/notes';
-//import Navbar from './navbar/navbar';
-import SignUp from './signup/signup';
-import LogIn from './login/login';
+import Notes from './pages/notes/notes';
+import SignUp from './pages/authPages/signup/signup';
+import LogIn from './pages/authPages/login/login';
 
 class App extends React.Component {
 

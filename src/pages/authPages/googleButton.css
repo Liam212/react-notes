@@ -9,6 +9,7 @@
   transition-property: background-color, box-shadow;
   transition-duration: 150ms;
   transition-timing-function: ease-in-out;
+  margin: 15px 0px 15px 0px;
   padding: 0;
 }
   .google-button:hover {
@@ -55,16 +56,15 @@ button ~ button {
 }
 
 .alternative-signup {
-  font-weight: 300;
-  margin-top: 20px;
-  margin-bottom: 0px;
+  font-weight: 400;
+  margin: 15px 0px 15px 0px;
 }
 
 hr {
   border: 0;
   clear:both;
   display:block;
-  width: 80%;               
-  background-color:grey;
+  width: 70%;               
+  background-color: black;
   height: 1px;
 }

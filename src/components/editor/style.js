@@ -1,11 +1,12 @@
 const styles = theme => ({
+    body: {
+      height: '100%'
+    },
     root: {
       backgroundColor: theme.palette.background.paper,
-      height: 'calc(100% - 35px)',
-      position: 'absolute',
-      left: '0',
-      width: '300px',
-      boxShadow: '0px 0px 2px black'
+      marginLeft: '200px',
+      padding: '1px 16px',
+      height: '1000px'
     },
     titleInput: {
       height: '50px',

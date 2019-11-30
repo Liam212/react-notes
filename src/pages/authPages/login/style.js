@@ -1,7 +1,7 @@
 const styles = theme => ({
     main: {
       width: 'auto',
-      display: 'block', // Fix IE 11 issue.
+      display: 'block', 
       marginLeft: theme.spacing(3),
       marginRight: theme.spacing(3),
       [theme.breakpoints.up(400 + theme.spacing(2))]: {
@@ -23,11 +23,11 @@ const styles = theme => ({
     submit: {
       marginTop: theme.spacing(3),
     },
-    hasAccountHeader: {
+    noAccountHeader: {
       width: '100%',
-      fontWeight: 300
+      fontWeight: 400
     },
-    logInLink: {
+    signUpLink: {
       width: '100%',
       textDecoration: 'none',
       color: '#303f9f',

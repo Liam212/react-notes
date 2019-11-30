@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './style';
 import List from '@material-ui/core/List';
-import { Divider, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import SidebarItemComponent from '../sidebaritem/sidebaritem';
 
 const firebase = require('firebase')
@@ -45,7 +45,6 @@ class SidebarComponent extends React.Component {
                       selectNote={this.selectNote}
                       deleteNote={this.deleteNote}>
                      </SidebarItemComponent>
-                     <Divider></Divider>
                     </div>
                   )
                 })
